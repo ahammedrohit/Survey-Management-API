@@ -3,6 +3,9 @@ const User = require('../models/users')
 //Import bcrypt for password hash
 const bcrypt = require('bcryptjs')
 
+//Unique ID Generator
+const { v4: uuidv4 } = require('uuid');
+
 
 //POST user information to database on Register
 const registerController = (req, res, next) => {
@@ -14,6 +17,7 @@ const registerController = (req, res, next) => {
             })
         }
         let user = new User({
+            _id: uuidv4(),
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -49,7 +53,11 @@ const loginController = (req,res,next) =>{
     User.findOne({email})
         .then(userEmail =>{
 
-            let name  = userEmail.lastName
+
+            let uid = userEmail.id
+            let firstName = userEmail.firstName
+            let lastName  = userEmail.lastName
+            let email = userEmail.email
 
             if(userEmail){
                 bcrypt.compare(password,userEmail.password,(err,result)=>{
@@ -60,7 +68,11 @@ const loginController = (req,res,next) =>{
                     } 
                     else if(result){
                         res.json({
-                            message:'Login Successful for user: '+name
+                            message:'Login Successful for user: '+lastName,
+                            uid,
+                            firstName,
+                            lastName,
+                            email
                         })
                     } else {
                         res.json({

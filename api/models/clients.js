@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const validator = require('validator')
 
 const clientSchema = new Schema({
+    _id: String,
     firstName: {
         type: String,
         trim: true,

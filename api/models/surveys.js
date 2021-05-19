@@ -1,42 +1,36 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-//Email Validator
-const validator = require('validator')
 
-const userSchema = new Schema({
+const surveySchema = new Schema({
     _id: String,
-    firstName: {
+    surveyTitle: {
+        type: String,
+        trim: true,
+        required: true,
+        minlength: 3
+
+    },
+    surveyDescription: {
         type: String,
         trim: true,
         required: true,
         minlength: 1
 
     },
-    lastName: {
-        type: String,
+    questionList: {
+        type: Object,
         trim: true,
-        required: true,
-        minlength: 1
+        required: true
+    }
 
-    },
-    email: {
-        type: String,
-        trim: true,
-        unique: true,
-        validator: (v) => {
-            return validator.isEmail(v)
-        },
-        message: '{value} is not a valid Email'
-    },
-    password : String
 })
 
 //var userDatabase = mongoose.createConnection('mongodb://localhost/userData');
 //userDatabase.model('Users', Schema(userSchema));
 
-const userModel = mongoose.model('User', userSchema)
+const surveyModel = mongoose.model('Survey', surveySchema)
 
-module.exports = userModel
+module.exports = surveyModel
 
 //After Model Create Route and Controller

@@ -14,6 +14,7 @@ mongoose.set('useCreateIndex', true);
 
 const userRouter = require('./api/routes/userRoute');
 const clientRouter = require('./api/routes/clientRoute');
+const surveyRouter = require('./api/routes/surveyRoute')
 
 
 
@@ -33,6 +34,7 @@ const port = process.env.PORT || 3000;
 
 app.use('/api/users', userRouter);
 app.use('/api/clients', clientRouter);
+app.use('/api/survey', surveyRouter);
 
 
 
