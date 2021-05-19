@@ -44,6 +44,14 @@ localhost:3000/api/clients/login/
 Get All User List
 localhost:3000/api/clients/allusers
 
+For Survey
+
+Post Survey
+localhost:3000/api/survey/postsurvey/
+
+Get All Survey List
+localhost:3000/api/survey/allsurveys
+
 
 //JSON Web Token Secret Key = ValarMorghulis
 
